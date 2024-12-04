@@ -1,0 +1,21 @@
+Header always set X-Frame-Options "DENY"
+Header always set Access-Control-Allow-Origin "*"
+Header always set Access-Control-Allow-Methods "GET, POST"
+Header always set Access-Control-Allow-Headers "Content-Type"
+Header always set Content-Security-Policy "frame-ancestors 'none';"
+Header edit Set-Cookie ^(.*)$ $1;HttpOnly
+ErrorDocument 404 404.php
+ErrorDocument 403 403.php
+Options -Indexes
+DirectoryIndex Login.html
+Header unset X-Powered-By
+php_value max_input_vars 5000
+<LimitExcept GET POST>
+  Deny from all
+</LimitExcept>
+<LimitExcept GET POST>
+  Require all denied
+</LimitExcept>
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} ^(TRACE|HEAD) [NC]
+RewriteRule .* - [F]
