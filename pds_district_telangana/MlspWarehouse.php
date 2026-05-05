@@ -38,7 +38,9 @@ td {
 								<a href="BulkMlspWarehouseData.php" style="float:right;margin-top:10px;margin-right:13px"><button type="button" class="btn btn-info">Bulk Data Add</button></a>
 								<span style="float:right;margin-top:10px;margin-right:13px"><button type="button" onclick="delete_all()"  class="btn btn-danger">Delete All</button></span>
 								<a href="MlspWarehouseAdd.php" style="float:right;margin-top:10px;margin-right:13px"><button type="button" class="btn btn-success">Add New</button></a>
+                                <span style="float:right;margin-top:10px;margin-right:13px"><button type="button" id="loadDataBtn" onclick="loadMlspWarehouseData()" class="btn btn-primary">Load Data</button></span>
                                 <a href="api/BulkMlspWarehouseDownloadEdit.php" style="float:right;margin-top:10px;margin-right:13px"><button type="button" class="btn btn-info">Download Data</button></a>
+                                <div id="loadDataMessage" style="clear:both; margin:55px 13px 0 13px;"></div>
                             <div class="panel-body">
                                  <div class="table-responsive">
                                     <table id="export_table" class="table datatable">
@@ -210,6 +212,37 @@ td {
 		}
 		
 		function change_status(temp_id){
+                function showLoadMessage(message, type){
+                        var container = document.getElementById('loadDataMessage');
+                        container.innerHTML = '<div class="alert alert-' + (type === 'success' ? 'success' : (type === 'info' ? 'info' : 'danger')) + '">' + message + '</div>';
+                }
+
+                function loadMlspWarehouseData(){
+                        var btn = document.getElementById('loadDataBtn');
+                        btn.textContent = 'Loading...';
+                        btn.disabled = true;
+                        showLoadMessage("Loading data from external API, mapping values, grouping demands, and inserting into database. This may take a few minutes...", 'info');
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "api/LoadMlspWarehouseData.php", true);
+                        xhr.onreadystatechange = function () {
+                                if (xhr.readyState === 4) {
+                                        if (xhr.status === 200) {
+                                                try {
+                                                        var res = JSON.parse(xhr.responseText);
+                                                        showLoadMessage(res.message, res.status === 'success' ? 'success' : 'error');
+                                                } catch(e) {
+                                                        showLoadMessage("Unexpected response from server.", 'error');
+                                                }
+                                        } else {
+                                                showLoadMessage("Error: Request failed. (" + xhr.status + ")", 'error');
+                                        }
+                                        btn.textContent = 'Load Data';
+                                        btn.disabled = false;
+                                }
+                        };
+                        xhr.send();
+                }
 			post({uid: temp_id} ,"api/MlspWarehouseStatus.php");
 		}
 		
