@@ -143,6 +143,7 @@ if($currentTimestamp >= $targetTimestamp) {
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
                     <li class="active">Telangana Intra Route Optimization For PDS</li>
+					<li id="lastLogin"></li>
                 </ul>
                 <!-- END BREADCRUMB -->
 
@@ -666,7 +667,6 @@ if($currentTimestamp >= $targetTimestamp) {
 					},
 					timeout: 59000,
 					success: function(result){
-						console.log(result);
 						$('#table_body').empty();
 						try{
 							var resultarray = JSON.parse(result);
@@ -759,6 +759,40 @@ if($currentTimestamp >= $targetTimestamp) {
 			}
 		}
 		fetchDataFromServer();
+
+		function fetchLastLogin() {
+    // Fetch the last login data from the server (API endpoint)
+		fetch('api/LastLogin.php')
+			.then(response => {
+				// Check if the response is ok (status 200-299)
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.json(); // Parse the JSON response
+			})
+			.then(data => {
+				// Log the data to check its structure
+				console.log('Received data:', data);
+
+				// Handle the case where there is an error in the response
+				if (data.error) {
+					document.getElementById('lastLogin').innerText = data.error;
+				} else {
+					// If last login data exists, display it, otherwise show a default message
+					document.getElementById('lastLogin').innerText = 
+						data.lastlogin ? `Last Login: ${data.lastlogin}` : 'No Last Login Data Found';
+				}
+			})
+			.catch(error => {
+				// Handle network errors or other issues
+				console.error('Error:', error);
+				document.getElementById('lastLogin').innerText = 'An error occurred while fetching data.';
+			});
+         }
+
+// Fetch the last login when the page loads
+		window.onload = fetchLastLogin();
+
 		
 		// Set the end time from PHP to JavaScript
 		var endTime = "<?php echo strtotime($date." ".$time); ?>";

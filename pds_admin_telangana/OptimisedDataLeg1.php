@@ -154,7 +154,7 @@ if($currentTimestamp >= $targetTimestamp) {
                             <!-- START SIMPLE DATATABLE -->
                             <div class="panel panel-default">
 								<div class="panel-heading">
-                                    <h3 class="panel-title">Telangana Intra Route Optimization For PDS <div id="timer"> <b>Time Left &nbsp </b> <span id="countdown"></span></h3>
+                                    <h3 class="panel-title">Telangana Intra Route Optimization For PDS </h3>
                                 </div>
                             </div>
 							<div class="row">

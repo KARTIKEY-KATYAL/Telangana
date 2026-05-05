@@ -37,9 +37,11 @@ require('Header.php');
 								<a href="BulkFPSStatusChange.php" style="float:right;margin-top:10px;margin-right:13px"><button type="button" class="btn btn-info">District-Wise Status Change</button></a>
 								<a href="BulkFPSDataEdit.php" style="float:right;margin-top:10px;margin-right:13px"><button type="button" class="btn btn-warning">Bulk Data Edit</button></a>
 								<a href="BulkFPSData.php" style="float:right;margin-top:10px;margin-right:13px"><button type="button" class="btn btn-info">Bulk Data Add</button></a>
+								<span style="float:right;margin-top:10px;margin-right:13px"><button type="button" id="loadDataBtn" onclick="loadFPSData()" class="btn btn-primary">Load Data</button></span>
 								<span style="float:right;margin-top:10px;margin-right:13px"><button type="button" onclick="delete_all()"  class="btn btn-danger">Delete All</button></span>
 								<a href="FPSAdd.php" style="float:right;margin-top:10px;margin-right:13px"><button type="button" class="btn btn-success">Add New</button></a>
                                 <a href="api/BulkFPSDownloadEdit.php" style="float:right;margin-top:10px;margin-right:13px"><button type="button" class="btn btn-info">Download Data</button></a>
+								<div id="loadDataMessage" style="clear:both; margin:55px 13px 0 13px;"></div>
                             
 								</br></br>
 								<div>
@@ -228,7 +230,46 @@ require('Header.php');
 		function hidePopup() {
             document.getElementById('popup').style.display = 'none';
         }
+
+		function showLoadMessage(message, type){
+			var container = document.getElementById('loadDataMessage');
+			if(!container){
+				return;
+			}
+			var classes = 'alert ' + (type === 'success' ? 'alert-success' : 'alert-danger');
+			container.innerHTML = '<div class="' + classes + '" style="margin-bottom:0; padding:10px 14px;">' + message + '</div>';
+		}
 		
+		function loadFPSData(){
+			var btn = document.getElementById('loadDataBtn');
+			btn.disabled = true;
+			btn.textContent = 'Loading...';
+			$.ajax({
+				type: "POST",
+				url: "api/LoadFPSData.php",
+				cache: false,
+				dataType: "text",
+				error: function(xhr, status, err){
+					showLoadMessage("Error: Request failed. (" + status + ")<br>" + (xhr.responseText || '').substring(0, 300), 'error');
+					btn.disabled = false;
+					btn.textContent = 'Load Data';
+				},
+				success: function(result){
+					try {
+						var res = JSON.parse(result);
+						showLoadMessage(res.message, res.status === 'success' ? 'success' : 'error');
+						if(res.status === 'success'){
+							fetchDataFromServer();
+						}
+					} catch(e) {
+						showLoadMessage("Unexpected response from server.", 'error');
+					}
+					btn.disabled = false;
+					btn.textContent = 'Load Data';
+				}
+			});
+		}
+
 		function fetchDataFromServer(){
 			var districtElement = document.getElementById('district');
 			var district = districtElement.value;
@@ -252,7 +293,7 @@ require('Header.php');
 				data: dataString,
 				cache: false,
 				error: function(){
-					alert("timeout");
+					showLoadMessage("timeout", 'error');
 					$("#filter_button").attr("disabled",false);
 				},
 				timeout: 216000,

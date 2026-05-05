@@ -3,6 +3,12 @@ require('util/Connection.php');
 require('util/SessionCheck.php');
 require('Header.php');
 ?>
+<style>
+    /* Ensure that the calendar is displayed correctly */
+.dropdown-menu {
+    top: 190px !important;
+}
+</style>
 
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">

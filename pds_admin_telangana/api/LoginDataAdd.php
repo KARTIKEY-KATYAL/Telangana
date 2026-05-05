@@ -22,7 +22,7 @@ if($_SESSION['user']!=$person->getUsername()){
     return;
 }
 
-// Validate password length
+
 if (strlen($_POST["newpassword"]) < '5' || strlen($_POST["newusername"]) < '5') {
     echo "Username & Password must be at least 5 characters long";
     return;
@@ -39,6 +39,12 @@ if (!preg_match('/^[a-zA-Z0-9_@]+$/', $newusername)) {
     echo "Username can only contain letters, numbers, underscores and @.";
     return;
 }
+
+if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/', $_POST["newpassword"])) {
+   echo "Password must contain at least one uppercase letter, one special character, and one number.";
+   return;
+}
+
 
 // Query the database to get the stored hash for the username
 $query = "SELECT * FROM login WHERE username='".$person->getUsername()."'";

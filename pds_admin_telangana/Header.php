@@ -10,11 +10,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-black.css"/>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script> var pythonUrl = "http://localhost:5000/"; var directory = "" </script>
-								
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<!-- <script> var pythonUrl = "https://tgcsro.telangana.gov.in/api/"; var directory = "" </script>				 -->
+		<script> var pythonUrl = "http://localhost:5000/"; var directory = "" </script>				
 		<style>
 		.popup {
 			display: none;
@@ -130,8 +130,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
 				<li>
 					<a href="District.php" style="padding-left:0px"><span class="xn-text" style="font-family:sans-serif;font-weight:italic;font-size:16px;">Edit Districts</span></a>
 				</li>
-				<li>
-					<a href="Warehouse.php" style="padding-left:0px"><span class="xn-text" style="font-family:sans-serif;font-weight:italic;font-size:16px;">Edit Warehouse</span></a>
+				<li <?php echo ($current_page === 'Warehouse.php' || $current_page === 'WarehouseAdd.php' || $current_page === 'WarehouseEdit.php' || $current_page === 'WarehouseView.php' || $current_page === 'BulkWarehouseData.php' || $current_page === 'BulkWarehouseDataEdit.php' || $current_page === 'BulkWarehouseStatusChange.php') ? 'class="active"' : ''; ?>>
+					<a href="Warehouse.php" style="padding-left:0px"><span class="xn-text" style="font-family:sans-serif;font-weight:italic;font-size:16px;">Edit Buffer Warehouse</span></a>
+				</li>
+				<li <?php echo ($current_page === 'MlspWarehouse.php' || $current_page === 'MlspWarehouseAdd.php' || $current_page === 'MlspWarehouseEdit.php' || $current_page === 'MlspWarehouseView.php' || $current_page === 'BulkMlspWarehouseData.php' || $current_page === 'BulkMlspWarehouseDataEdit.php' || $current_page === 'BulkMlspWarehouseStatusChange.php') ? 'class="active"' : ''; ?>>
+					<a href="MlspWarehouse.php" style="padding-left:0px"><span class="xn-text" style="font-family:sans-serif;font-weight:italic;font-size:16px;">Edit MLSP Warehouse</span></a>
 				</li>
 				<li>
 					<a href="FPS.php" style="padding-left:0px"><span class="xn-text" style="font-family:sans-serif;font-weight:italic;font-size:16px;">Edit FPS</span></a>
@@ -145,6 +148,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
 				<li>
 					<a href="Timer.php" style="padding-left:0px"><span class="xn-text" style="font-family:sans-serif;font-weight:italic;font-size:16px;">Edit Deadline</span></a>
 				</li>
+                                <li>
+                                      <a href="../../manual.pdf" download style="padding-left:0px"><span class="xn-text" style="font-family:sans-serif;font-weight:italic;font-size:16px;">Download Manual</span></a></li>
+                                <li>
 				<li>
 					<a style="padding-left:0px"><span class="xn-text" style="font-family:sans-serif;font-weight:italic;font-size:16px;">Version V.1</span></a>
 				</li>

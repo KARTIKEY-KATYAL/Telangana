@@ -22,7 +22,7 @@ $tablename = "warehouse_".$id;
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="Warehouse.php">Home</a></li>
-                    <li class="active">Warehouse View</li>
+                    <li class="active">Buffer Warehouse View</li>
                 </ul>
                 <!-- END BREADCRUMB -->
 
@@ -36,7 +36,7 @@ $tablename = "warehouse_".$id;
                             <!-- START SIMPLE DATATABLE -->
                             <div class="panel panel-default">
 							<div class="panel-heading">
-                                    <h3 class="panel-title">Warehouse</h3>
+                                    <h3 class="panel-title">Buffer Warehouse</h3>
                                 </div>
 								<div style="float:right" style="margin:10px">
 									<button id="downloadCSV" class="btn btn-warning" style="margin-bottom: 10px;" type="button">Download CSV</button>

@@ -10,7 +10,7 @@ $district = ucfirst($_SESSION["district_district"]);
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
-                    <li class="active">Warehouse Add</li>
+                    <li class="active">Buffer Warehouse Add</li>
                 </ul>
                 <!-- END BREADCRUMB -->
 
@@ -24,7 +24,7 @@ $district = ucfirst($_SESSION["district_district"]);
                             <form action="api/WarehouseAdd.php" method="POST" class="form-horizontal" enctype = "multipart/form-data">
                             <div class="panel panel-default">
                                <div class="panel-body">
-                                    <p>Fill this form to add new warehouse.</p>
+                                    <p>Fill this form to add new buffer warehouse.</p>
                                 </div>
 
                              <div class="panel-body">

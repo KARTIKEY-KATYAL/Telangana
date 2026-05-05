@@ -18,7 +18,7 @@ td {
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
-                    <li class="active">Warehouse</li>
+                    <li class="active">Buffer Warehouse</li>
                 </ul>
                 <!-- END BREADCRUMB -->
 
@@ -32,7 +32,7 @@ td {
                             <!-- START SIMPLE DATATABLE -->
                             <div class="panel panel-default">
 							<div class="panel-heading">
-                                    <h3 class="panel-title">Warehouse</h3>
+                                    <h3 class="panel-title">Buffer Warehouse</h3>
                                 </div>
 								<a href="BulkWarehouseDataEdit.php" style="float:right;margin-top:10px;margin-right:13px"><button type="button" class="btn btn-warning">Bulk Data Edit</button></a>
 								<a href="BulkWarehouseData.php" style="float:right;margin-top:10px;margin-right:13px"><button type="button" class="btn btn-info">Bulk Data Add</button></a>

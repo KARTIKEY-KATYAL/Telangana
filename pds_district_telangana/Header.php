@@ -28,7 +28,7 @@ if($numrows>0){
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" type="text/css" id="theme" href="css/theme-black.css"/>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     </head>
     <body>
         <!-- START PAGE CONTAINER -->
@@ -61,9 +61,12 @@ if($numrows>0){
 					<li <?php if ($currentFile == 'RolloutPlan.php') echo 'class="active"'; ?>>
 						<a href="RolloutPlan.php"> <span class="xn-text">Rollout Plan</span></a>
 					</li>
-					<li <?php if ($currentFile == 'Warehouse.php') echo 'class="active"'; ?>>
-						<a href="Warehouse.php"> <span class="xn-text">Warehouse</span></a>
-					</li>
+				<li <?php if ($currentFile == 'Warehouse.php' || $currentFile == 'WarehouseAdd.php' || $currentFile == 'WarehouseEdit.php' || $currentFile == 'BulkWarehouseData.php' || $currentFile == 'BulkWarehouseDataEdit.php') echo 'class="active"'; ?>>
+					<a href="Warehouse.php"> <span class="xn-text">Buffer Warehouse</span></a>
+				</li>
+				<li <?php if ($currentFile == 'MlspWarehouse.php' || $currentFile == 'MlspWarehouseAdd.php' || $currentFile == 'MlspWarehouseEdit.php' || $currentFile == 'BulkMlspWarehouseData.php' || $currentFile == 'BulkMlspWarehouseDataEdit.php') echo 'class="active"'; ?>>
+					<a href="MlspWarehouse.php"> <span class="xn-text">MLSP Warehouse</span></a>
+				</li>
 					<li <?php if ($currentFile == 'FPS.php') echo 'class="active"'; ?>>
 						<a href="FPS.php"> <span class="xn-text">FPS</span></a>
 					</li>
